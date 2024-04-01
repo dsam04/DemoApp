@@ -1,0 +1,98 @@
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-home-page',
+  templateUrl: './home-page.component.html',
+  styleUrl: './home-page.component.css'
+})
+export class HomePageComponent implements OnInit {
+
+  registerusers !: FormGroup;
+
+  constructor(private router: Router, private formBuilder : FormBuilder, private http : HttpClient) {
+
+  }
+  ngOnInit(): void {
+    this.registerusers = this.formBuilder.group({
+      photo: [''] ,
+      firstName:[''],
+      lastName: [''],
+      email: [''],
+      mobile:[''],
+      age:[''],
+      state: [''],
+      country:[''],
+      tag: ['']
+    })
+  }
+
+  postData(){
+    this.http.post<any>("http://localhost:3000/users", this.registerusers.value)
+    .subscribe(res => {
+      alert("success");
+      this.registerusers.reset();
+      this.router.navigate(['/profile']);
+    },
+    err=>{
+      alert('wrong')
+    })
+  }
+
+  search() {
+    this.router.navigate(['https://www.google.com'])
+  }
+
+  addressType: string = ''; // Initialize address type
+  showHomeFields: boolean = false;
+  showCompanyFields: boolean = false;
+
+  showFields() {
+    if (this.addressType === 'Home') {
+      this.showHomeFields = true;
+      this.showCompanyFields = false;
+    } else if (this.addressType === 'Company') {
+      this.showHomeFields = false;
+      this.showCompanyFields = true;
+    } else {
+      this.showHomeFields = false;
+      this.showCompanyFields = false;
+    }
+  }
+
+  [x: string]: any;
+  errorMessage: string | null = null;
+  selectedFile: File | null = null;
+  imageSrc: string | ArrayBuffer | null = null;
+  interests: any;
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      this.previewImage();
+      
+    }
+    
+  }
+      
+  previewImage() {
+    const reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile as Blob);
+    reader.onload = () => {
+      this.imageSrc = reader.result as string;
+    };
+  }
+
+  age: number = 20;
+  
+  updateAge(value: string) {
+    this.age = parseInt(value, 10);
+  }
+
+
+}
+

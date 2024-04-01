@@ -1,0 +1,60 @@
+<!-- Main container -->
+
+<div class="container-fluid">
+  <!-- navbar starts -->
+  <nav class="navbar navbar-expand-sm shadow-5-strong ">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand">DEMO APP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="home" routerLinkActive="active" >HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="register" routerLinkActive="active">ABOUT US</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="contact" routerLinkActive="active">JOBS</a>
+          </li>       
+          <li class="nav-item">
+            <a class="nav-link" routerLink="#" routerLinkActive="active">CLIENTS</a>
+          </li>       
+          <li class="nav-item">
+            <a class="nav-link" routerLink="#" routerLinkActive="active">EMPLOYEES</a>
+          </li>       
+          <li class="nav-item">
+            <a class="nav-link" routerLink="#" routerLinkActive="active">CONTACT US</a>
+          </li>       
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- navbar closed -->
+</div>
+
+<router-outlet></router-outlet>
+
+<div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 mx-auto bottom">
+  <!-- footer starts  -->
+  <div class="container py-5">
+    <footer>
+      <div class="pb-5">
+        <div class="col-md-6 position-relative mx-auto">
+          <p>Subscribe to our job Seeker Mailing List</p>
+        </div>
+        <div class="col-md-6 position-relative mx-auto">
+          <form>
+            <div class="form-group">
+              <input type="email" class="form-control border-0 w-100 py-3 px-4" id="email" placeholder="Enter Your Email Address">
+            </div>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  <!-- footer end  -->
+</div>

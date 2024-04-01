@@ -1,0 +1,55 @@
+.carousel-indicators button{
+    border-radius: 50% !important;
+    width: 15px;
+    height: 15px;
+}
+
+.carousel-inner .carousel-item img{
+    height: 25%;
+}
+
+.carousel-caption{
+    top:50%;
+    transform: translateY(-50%);
+    bottom: initial;
+}
+.carousel-inner form{
+    padding: 10px;
+}
+
+.carousel-inner h2{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-style: oblique;
+}
+
+hr{
+    width: 70px;
+    height: 3px;
+    background-color: blue;
+}
+
+.about h3{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.about h2{
+    font-weight: 500;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+
+.details input , select{
+    margin: 8px;
+}
+
+.form-control-photo{
+    width: 100px;
+    height: 100px;
+}
+.form-control-photo{
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzqE8LeMTVpELy7wbrd9Sx9X_Z60_p3-ZYPvAR8aY-FcN4arlnaeQmmvMmcqnBxu5hJpA&usqp=CAU");
+    background-size: cover;
+}

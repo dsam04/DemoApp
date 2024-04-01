@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="d-flex">
+        <div class="modal-body mx-5">
+            <div class="d-flex mx-auto" *ngFor="let user of users">
+                <div class="photo me-3">
+                    <img [src]="user.photo" alt="photo" width="100" height="100"> 
+                    <button type="button" class="btn bg-warning me-2 my-2">Edit Photo</button>
+                        <button type="button" class="btn bg-warning me-2 my-2">Edit Profile</button>
+                    
+                </div>
+                <div class="details">
+                    <p>
+                        I'm {{ user.firstName }} {{ user.lastName }} and I'm above {{user.age}} age years and you can send your
+                        emails to {{user.email}}.
+                        I live in the {{user.state}} of {{user.country}}. I like to play {{user.tag}}. And please send me
+                        newslatter. Please reach out to me on my number {{user.mobile}}.
+                        
+                    </p>
+                    <div>
+                        <button class="btn btn-success" (click)="homenavigation()">I Agree</button>
+                    </div>
+                </div>
+                
+            </div>
+
+
+        </div>
+    </div>
