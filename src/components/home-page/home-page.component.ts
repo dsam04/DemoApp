@@ -33,12 +33,12 @@ export class HomePageComponent implements OnInit {
   postData(){
     this.http.post<any>("http://localhost:3000/users", this.registerusers.value)
     .subscribe(res => {
-      alert("success");
+      alert("Registration success");
       this.registerusers.reset();
       this.router.navigate(['/profile']);
     },
     err=>{
-      alert('wrong')
+      alert('Something is wrong')
     })
   }
 
@@ -72,9 +72,19 @@ export class HomePageComponent implements OnInit {
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      this.selectedFile = file;
-      this.previewImage();
-      
+      if (file) {
+        this.selectedFile = file;
+        if (event.target.files && event.target.files[0]) {
+          if (event.target.files[0].size < 310 * 313) {
+            this.previewImage();
+            this.errorMessage = null;
+          }
+          else {
+            this.errorMessage = 'Image dimensions Lies between 310x325 pixels.';
+            this.imageSrc = null;
+          }
+        } 
+      }
     }
     
   }

@@ -11,18 +11,6 @@
       "state": "Maharashtra",
       "country": "india",
       "tag": "hockey"
-    },
-    {
-      "id": "bf79",
-      "photo": "C:\\fakepath\\img2.jpg",
-      "firstName": "abc",
-      "lastName": "xyz",
-      "email": "info@gmail.com",
-      "mobile": 1234567890,
-      "age": 23,
-      "state": "Maharashtra",
-      "country": "india",
-      "tag": "hockey, cricket"
     }
   ]
 }
