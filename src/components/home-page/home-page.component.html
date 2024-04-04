@@ -31,12 +31,12 @@
                         </div>
                         <div class="col-md-4 form-floating">
                             <select class="form-select" id="sel1" name="sellist">
+                                <option selected>State</option>
                                 <option>Pune</option>
                                 <option>Mumbai</option>
                                 <option>Haidrabad</option>
                                 <option>Banglore</option>
                             </select>
-                            <label for="sel1" class="form-label text-muted ">Select location</label>
                         </div>
                     </form>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -62,12 +62,12 @@
                         </div>
                         <div class="col-md-4 form-floating">
                             <select class="form-select" id="sel1" name="sellist">
+                                <option selected>State</option>
                                 <option>Pune</option>
                                 <option>Mumbai</option>
                                 <option>Haidrabad</option>
                                 <option>Banglore</option>
                             </select>
-                            <label for="sel1" class="form-label text-muted ">Select location</label>
                         </div>
                     </form>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -93,12 +93,12 @@
                         </div>
                         <div class="col-md-4 form-floating">
                             <select class="form-select" id="sel1" name="sellist">
+                                <option selected>State</option>
                                 <option>Pune</option>
                                 <option>Mumbai</option>
                                 <option>Haidrabad</option>
                                 <option>Banglore</option>
                             </select>
-                            <label for="sel1" class="form-label text-muted ">Select location</label>
                         </div>
                     </form>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -124,12 +124,12 @@
                         </div>
                         <div class="col-md-4 form-floating">
                             <select class="form-select" id="sel1" name="sellist">
+                                <option selected>State</option>
                                 <option>Pune</option>
                                 <option>Mumbai</option>
                                 <option>Haidrabad</option>
                                 <option>Banglore</option>
                             </select>
-                            <label for="sel1" class="form-label text-muted ">Select location</label>
                         </div>
                     </form>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -177,7 +177,8 @@
                         <div class="d-flex">
                             <div class="photo">
                                 <input type="file" class="form-control form-control-photo" id="photo"
-                                    title="upload your photo" (change)="onFileSelected($event)" accept="image/*" formControlName="photo"/>
+                                    title="upload your photo" (change)="onFileSelected($event)" accept="image/*"
+                                    formControlName="photo" />
 
                                 <label for="photo" class="form-label text-primary">upload your photo</label>
                                 <div *ngIf="imageSrc">
@@ -190,38 +191,42 @@
                                 <div class="row">
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="First Name"
-                                            name="firstName" required minlength="2" maxlength="30" formControlName="firstName"/>
+                                            name="firstName" required minlength="2" maxlength="30"
+                                            formControlName="firstName" />
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="Last Name" name="lastName"
                                             required minlength="2" maxlength="30" formControlName="lastName" />
                                     </div>
                                 </div>
-                                <input formControlName="email" type="email" class="form-control" name="email" placeholder="Email" 
-                                required minlength="2" maxlength="30" formControlName="email"/>
+                                <input formControlName="email" type="email" class="form-control" name="email"
+                                    placeholder="Email" required minlength="2" maxlength="30" formControlName="email" />
 
-                                <input formControlName="mobile" type="number" class="form-control" name="phone" placeholder="(541)754-3010"
-                                    required minlength="10" maxlength="10" formControlName="mobile" />
+                                <input formControlName="mobile" type="number" class="form-control" name="phone"
+                                    placeholder="(541)754-3010" required minlength="10" maxlength="10"
+                                    formControlName="mobile" />
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label for="age">Age {{age}}</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="range" class="form-range customRange" value="1" min="20" max="60"
-                                            name="age" #ageInput (input)="updateAge(ageInput.value)" formControlName="age"/>
+                                            name="age" #ageInput (input)="updateAge(ageInput.value)"
+                                            formControlName="age" />
                                         <div class="d-flex justify-content-between">
                                             <span>20</span>
                                             <span>60</span>
                                         </div>
                                     </div>
                                 </div>
-                                <select class="form-select" id="select" aria-label="State" required formControlName="state">
+                                <select class="form-select" id="select" aria-label="State" required
+                                    formControlName="state">
                                     <option value="">State</option>
                                     <option value="Maharashtra">Maharashtra</option>
                                     <option value="Goa">Goa</option>
                                     <option value="Panjab">Panjab</option>
                                 </select>
-                                
+
                                 <select class="form-select" aria-label="State" required formControlName="country">
                                     <option value="">Country</option>
                                     <option value="india">India</option>
@@ -233,29 +238,43 @@
                                     <option value="">Address</option>
                                     <option value="Home">Home</option>
                                     <option value="Company">Company</option>
-                            </select>
+                                </select>
 
                                 <div *ngIf="showHomeFields">
-                                    <input type="text" id="homeAddress1" name="homeAddress1" >
-                                    
-                                    <input type="text" id="homeAddress2" name="homeAddress2" style="border-radius: 5;">
-                                    
+                                    <input type="text" id="homeAddress1" name="homeAddress1" style="border-radius: 5;"
+                                        placeholder="Home Address 1" />
+
+                                    <input type="text" id="homeAddress2" name="homeAddress2" style="border-radius: 5;"
+                                        placeholder="Home Address 2" />
+
                                 </div>
 
-                                <div *ngIf="showCompanyFields">                                    
-                                    <input type="text" id="companyAddress1" />
+                                <div *ngIf="showCompanyFields">
+                                    <input type="text" id="companyAddress1" name="companyAddress1"
+                                        placeholder="Company Address 1" style="border-radius: 5;" />
 
-                                    <input type="text" id="companyAddress2" />
+                                    <input type="text" id="companyAddress2" name="companyAddress2"
+                                        placeholder="Company Address 2" style="border-radius: 5;" />
                                 </div>
                                 <!-- Tags for interests -->
                                 <div class="form-select">
-                                    
+
                                     <!-- Tags for interests -->
                                     <div class="tags-container">
-                                        <input type="text" class="form-control c1" id="interest" placeholder="Tags" name="interest" formControlName="tag"/>
-                                        <div *ngFor="let tag of interests; let i = index" class="tag">
-                                            {{ tag [i] }}
-                                        </div>
+                                        <input placeholder="Tags" [matChipInputFor]="chipGrid"
+                                            (matChipInputTokenEnd)="add($event)" />
+
+                                        <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl"
+                                            formControlName="tag">
+                                            @for (keyword of keywords; track keyword) {
+                                            <mat-chip-row (removed)="removeKeyword(keyword)">
+                                                {{keyword}}
+                                                <button matChipRemove aria-label="'remove ' + keyword">
+                                                    <mat-icon>cancel</mat-icon>
+                                                </button>
+                                            </mat-chip-row>
+                                        }
+                                        </mat-chip-grid>
                                     </div>
                                 </div>
 
@@ -263,10 +282,11 @@
                                     <input type="checkbox" name="subscribe" id="subscribe" #subscribe>
                                     <span class="text-muted">subscribe to newslatter</span>
                                 </div>
-                                <button type="submit" class="btn border" data-bs-dismiss="modal" style="margin: 10px;">Cancel</button>
+                                <button type="submit" class="btn border" data-bs-dismiss="modal"
+                                    style="margin: 10px;">Cancel</button>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                            
+
                         </div>
                     </form>
 
