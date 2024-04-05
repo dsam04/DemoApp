@@ -105,7 +105,7 @@ export class HomePageComponent implements OnInit {
     this.age = parseInt(value, 10);
   }
 
-  keywords = ['play',] ;
+  keywords = ['cricket','football','hockey'] ;
   formControl = new FormControl(['angular']);
 
   announcer = inject(LiveAnnouncer);

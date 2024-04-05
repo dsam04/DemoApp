@@ -1,20 +1,19 @@
 {
   "users": [
     {
-      "id": "96a9",
-      "photo": "C:\\fakepath\\img2.jpg",
+      "id": "6b0b",
+      "photo": "C:\\fakepath\\Image-with-310-x-85-pixels.png",
       "firstName": "ABC",
-      "lastName": "xyz",
+      "lastName": "Xyz",
       "email": "info@gmail.com",
       "mobile": 1234567890,
-      "age": 22,
-      "state": "Maharashtra",
+      "age": 23,
+      "state": "Goa",
       "country": "india",
       "tag": [
-        "play",
-        "Hockey",
-        "Cricket",
-        "Footboll"
+        "cricket",
+        "hockey",
+        "badminton"
       ]
     }
   ]
