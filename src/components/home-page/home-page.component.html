@@ -173,38 +173,60 @@
 
                 <!-- Modal body -->
                 <div class="modal-body mx-5">
-                    <form [formGroup]="registerusers" (ngSubmit)="postData()">
+                    <form [formGroup]="registerusers" (ngSubmit)="postData ()">
                         <div class="d-flex">
                             <div class="photo">
                                 <input type="file" class="form-control form-control-photo" id="photo"
                                     title="upload your photo" (change)="onFileSelected($event)" accept="image/*"
-                                    formControlName="photo" />
+                                    formControlName="photo" name="pic" />
 
-                                <label for="photo" class="form-label text-primary">upload your photo</label>
+                                <label for="pic" class="form-label text-primary">upload your photo</label>
                                 <div *ngIf="imageSrc">
                                     <img [src]="imageSrc" alt="Preview" width="100" height="100">
                                 </div>
                                 <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+                                <div *ngIf="registerusers.get('photo')?.hasError('required') && registerusers.get('photo')?.touched">
+                                    Image is required
+                                </div>
                             </div>
                             <div class="details">
 
                                 <div class="row">
                                     <div class="col">
                                         <input type="text" class="form-control" placeholder="First Name"
-                                            name="firstName" required minlength="2" maxlength="30"
-                                            formControlName="firstName" />
+                                            name="firstName" formControlName="firstName" />
+                                            
+                                        <div *ngIf="registerusers.get('firstName')?.invalid && (registerusers.get('firstName')?.dirty || registerusers.get('firstName')?.touched)">
+                                            <div *ngIf="registerusers.get('firstName')?.hasAsyncValidator">First Name is required</div>
+                                            <div *ngIf="registerusers.get('firstName')?.hasValidator">Only alphabetic characters are allowed</div>
+                                        </div>
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Last Name" name="lastName"
-                                            required minlength="2" maxlength="30" formControlName="lastName" />
+                                        <input type="text" class="form-control" placeholder="Last Name" name="lastName" formControlName="lastName" />
+                                            <div *ngIf="registerusers.get('lastName')?.hasError && (registerusers.get('lastName')?.dirty || registerusers.get('lastName')?.touched)">
+                                                <div *ngIf="registerusers.get('lastName')?.errors">last Name is required</div>
+                                            </div>
                                     </div>
                                 </div>
-                                <input formControlName="email" type="email" class="form-control" name="email"
-                                    placeholder="Email" required minlength="2" maxlength="30" formControlName="email" />
+                                <div>
+                                    <input formControlName="email" type="email" class="form-control" name="email" placeholder="Email" />
+                                    <div *ngIf="registerusers.get('email')?.hasError('required') && registerusers.get('email')?.touched">
+                                        Email is required
+                                    </div>
+                                    <div *ngIf="registerusers.get('email')?.hasError('email') && registerusers.get('email')?.touched">
+                                        invalid email format
+                                    </div>    
+                                </div>
+                                <div>
+                                    <input formControlName="mobile" type="number" class="form-control" name="mobile" placeholder="(541)754-3010" />
+                                    <div *ngIf="registerusers.get('mobile')?.hasError('required') && registerusers.get('mobile')?.touched">
+                                        Mobile number is required
+                                    </div>
+                                    <div *ngIf="registerusers.get('mobile')?.hasError('pattern') && registerusers.get('mobile')?.touched">
+                                        Please enter a valid mobile number
+                                    </div>
+                                </div>
 
-                                <input formControlName="mobile" type="number" class="form-control" name="phone"
-                                    placeholder="(541)754-3010" required minlength="10" maxlength="10"
-                                    formControlName="mobile" />
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label for="age">Age {{age}}</label>
@@ -219,79 +241,97 @@
                                         </div>
                                     </div>
                                 </div>
-                                <select class="form-select" id="select" aria-label="State" required
-                                    formControlName="state">
-                                    <option value="">State</option>
-                                    <option value="Maharashtra">Maharashtra</option>
-                                    <option value="Goa">Goa</option>
-                                    <option value="Panjab">Panjab</option>
-                                </select>
-
-                                <select class="form-select" aria-label="State" required formControlName="country">
+                                <div>
+                                    <select class="form-select" id="select" aria-label="State" formControlName="state">
+                                        <option value="">State</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Panjab">Panjab</option>
+                                    </select>
+                                    <div *ngIf="registerusers.get('state')?.hasError('required') && registerusers.get('state')?.touched">
+                                        State is required
+                                    </div>
+                            </div>
+                            <div>
+                                <select class="form-select" aria-label="country" formControlName="country">
                                     <option value="">Country</option>
                                     <option value="india">India</option>
                                     <option value="other">Other</option>
                                 </select>
-
-                                <select class="form-select" id="addressType" [(ngModel)]="addressType"
-                                    [ngModelOptions]="{standalone: true}" (change)="showFields()">
+                                <div *ngIf="registerusers.get('country')?.hasError('required') && registerusers.get('country')?.touched">
+                                    Country is required
+                                </div>
+                            </div>
+                            <div>
+                                <select class="form-select" id="addressType" name="address" formControlName="address" (change)="showFields()">
                                     <option value="">Address</option>
                                     <option value="Home">Home</option>
                                     <option value="Company">Company</option>
                                 </select>
 
                                 <div *ngIf="showHomeFields" class="form-select">
-                                    <input type="text" id="homeAddress1" name="homeAddress1" style="border-radius: 5;"
+                                    <input type="text" id="address1" name="address1" style="border-radius: 5;" 
                                         placeholder="Home Address 1" />
 
-                                    <input type="text" id="homeAddress2" name="homeAddress2" style="border-radius: 5;"
+                                    <input type="text" id="address2" name="address2" style="border-radius: 5;"
                                         placeholder="Home Address 2" />
-
                                 </div>
 
                                 <div *ngIf="showCompanyFields" class="form-select">
-                                    <input type="text" id="companyAddress1" name="companyAddress1"
+                                    <input type="text" id="companyAddress1" name="companyAddress1" 
                                         placeholder="Company Address 1" style="border-radius: 5;" />
-
+                                        
                                     <input type="text" id="companyAddress2" name="companyAddress2"
                                         placeholder="Company Address 2" style="border-radius: 5;" />
+                                </div> 
+                                <div *ngIf="registerusers.get('address')?.hasError('required') && registerusers.get('address')?.touched">
+                                    Address is required
                                 </div>
-                                <!-- Tags for interests -->
-                                <div class="form-select">
-
+                            </div>
+                            <div class="form-select">
                                     <!-- Tags for interests -->
-                                    <div class="tags-container">
-                                        <input placeholder="Tags" [matChipInputFor]="chipGrid"
-                                            (matChipInputTokenEnd)="add($event)" />
+                                <div class="tags-container">
+                                    <input placeholder="Tags" [matChipInputFor]="chipGrid"
+                                        (matChipInputTokenEnd)="add($event)" 
+                                    />
 
-                                        <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl"
-                                            formControlName="tag">
-                                            @for (keyword of keywords; track keyword) {
+                                    <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl"
+                                        formControlName="tag">
+                                        @for (keyword of keywords; track keyword) {
                                             <mat-chip-row (removed)="removeKeyword(keyword)">
                                                 {{keyword}}
                                                 <button matChipRemove aria-label="'remove ' + keyword">
                                                     <mat-icon>cancel</mat-icon>
                                                 </button>
+                                                
                                             </mat-chip-row>
+                                            
                                         }
-                                        </mat-chip-grid>
-                                    </div>
+                                    </mat-chip-grid>
+                                    <div>
+                                    <mat-error *ngIf="registerusers.get('tag')?.hasError('required') && registerusers.get('tag')?.touched">
+                                        Tags are required
+                                    </mat-error>
                                 </div>
-
+                                </div>   
+                            </div>
                                 <div class="form-control border-0">
-                                    <input type="checkbox" name="subscribe" id="subscribe" #subscribe>
+                                    <input type="checkbox" name="subscribe" id="subscribe" formControlName="subscribe">
                                     <span class="text-muted">subscribe to newslatter</span>
+                                    <div *ngIf="registerusers.get('subscribe')?.invalid && (registerusers.get('subscribe')?.dirty || registerusers.get('subscribe')?.touched)">
+                                        <div *ngIf="registerusers.get('subscribe')?.errors">Please agree to the terms and conditions</div>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn border" data-bs-dismiss="modal"
                                     style="margin: 10px;">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                                <button type="submit" class="btn btn-primary" [disabled]="registerusers.invalid">Submit</button>
+                            </div> 
 
-                        </div>
+                         </div>
                     </form>
 
                 </div>
-            </div>
+            </div> 
 
             <!-- Modal footer -->
             <div class="modal-footer">
@@ -300,6 +340,7 @@
 
         </div>
     </div>
-</div>
+    
+</div> 
 
 <!-- Register-end  -->

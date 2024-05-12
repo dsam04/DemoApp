@@ -3,26 +3,271 @@
         <div class="modal-body mx-5">
             <div class="d-flex mx-auto" *ngFor="let user of users">
                 <div class="photo me-3">
-                    <img [src]="user.photo" alt="photo" width="100" height="100"> 
-                    <button type="button" class="btn bg-warning me-2 my-2">Edit Photo</button>
-                        <button type="button" class="btn bg-warning me-2 my-2">Edit Profile</button>
-                    
+                    <img [src]="user.photo " alt="{{user.photo}}" width="100" height="100" />
+                    <button type="submit" class="btn bg-warning me-2 my-2" data-bs-toggle="modal" data-bs-target="#updatephoto" (click)="getphoto(user.id)">Edit Photo</button>
+                    <button type="button" class="btn bg-warning me-2 my-2" data-bs-toggle="modal"
+                        data-bs-target="#updateprofile" (click)="geteuserbyId(user.id)">Edit Profile</button>
+
                 </div>
                 <div class="details">
                     <p>
-                        I'm {{ user.firstName }} {{ user.lastName }} and I'm above {{user.age}} age years and you can send your
+                        I'm {{ user.firstName }} {{ user.lastName }} and I'm above {{user.age}} age years and you can
+                        send your
                         emails to {{user.email}}.
-                        I live in the {{user.state}} of {{user.country}}. I like to play {{user.tag}}. And please send me
+                        I live in the {{user.state}} of {{user.country}}. I like to play {{user.tag}}. And please send
+                        me
                         newslatter. Please reach out to me on my number {{user.mobile}}.
-                        
+
                     </p>
                     <div>
                         <button class="btn btn-success" (click)="homenavigation()">I Agree</button>
                     </div>
                 </div>
-                
+
             </div>
 
 
         </div>
     </div>
+
+    <!-- Update Profile Model Start -->
+    <div class="modal fade" id="updateprofile">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">Update Profile</h4>
+                    <button type="button" class="btn-close border rounded-pill bg-light"
+                        data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body mx-5">
+                    <form [formGroup]="registerUsers" (ngSubmit)="submitForm()">
+                        <div class="d-flex">
+                            <div class="photo">
+                            <input type="file" class="form-control form-control-photo" id="photo" title="upload your photo"
+                                (change)="onFilechange($event)" accept="image/*" formControlName="photo" name="photo" />
+                        
+                            <label for="photo" class="form-label text-primary">upload your photo</label>
+                            <div *ngIf="imageSrc">
+                                <img [src]="imageSrc" alt="Preview" width="100" height="100">
+                            </div>
+                            <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+                            <div *ngIf="registerUsers.get('photo')?.hasError('required') && registerUsers.get('photo')?.touched">
+                                Image is required
+                            </div>
+                        </div>
+                            <div class="details">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="First Name"
+                                            name="firstName" formControlName="firstName" />
+
+                                        <div
+                                            *ngIf="registerUsers.get('firstName')?.invalid && (registerUsers.get('firstName')?.dirty || registerUsers.get('firstName')?.touched)">
+                                            <div *ngIf="registerUsers.get('firstName')?.hasAsyncValidator">First
+                                                Name is required</div>
+                                            <div *ngIf="registerUsers.get('firstName')?.hasValidator">Only
+                                                alphabetic characters are allowed</div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="Last Name" name="lastName"
+                                            formControlName="lastName" />
+                                        <div
+                                            *ngIf="registerUsers.get('lastName')?.hasError && (registerUsers.get('lastName')?.dirty || registerUsers.get('lastName')?.touched)">
+                                            <div *ngIf="registerUsers.get('lastName')?.errors">last Name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input formControlName="email" type="email" class="form-control" name="email"
+                                        placeholder="Email" />
+                                    <div
+                                        *ngIf="registerUsers.get('email')?.hasError('required') && registerUsers.get('email')?.touched">
+                                        Email is required
+                                    </div>
+                                    <div
+                                        *ngIf="registerUsers.get('email')?.hasError('email') && registerUsers.get('email')?.touched">
+                                        invalid email format
+                                    </div>
+                                </div>
+                                <div>
+                                    <input formControlName="mobile" type="number" class="form-control" name="mobile"
+                                        placeholder="(541)754-3010" />
+                                    <div
+                                        *ngIf="registerUsers.get('mobile')?.hasError('required') && registerUsers.get('mobile')?.touched">
+                                        Mobile number is required
+                                    </div>
+                                    <div
+                                        *ngIf="registerUsers.get('mobile')?.hasError('pattern') && registerUsers.get('mobile')?.touched">
+                                        Please enter a valid mobile number
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="age">Age {{age}}</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="range" class="form-range customRange" value="1" min="20" max="60"
+                                            name="age" #ageInput (input)="updateAge(ageInput.value)"
+                                            formControlName="age" />
+                                        <div class="d-flex justify-content-between">
+                                            <span>20</span>
+                                            <span>60</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="State" formControlName="state">
+                                        <option value="">State</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Panjab">Panjab</option>
+                                    </select>
+                                    <div
+                                        *ngIf="registerUsers.get('state')?.hasError('required') && registerUsers.get('state')?.touched">
+                                        State is required
+                                    </div>
+                                </div>
+                                <div>
+                                    <select class="form-select" aria-label="country" formControlName="country">
+                                        <option value="">Country</option>
+                                        <option value="india">India</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div
+                                        *ngIf="registerUsers.get('country')?.hasError('required') && registerUsers.get('country')?.touched">
+                                        Country is required
+                                    </div>
+                                </div>
+                                <div>
+                                    <select class="form-select" id="addressType" name="address" formControlName="address"
+                                        (change)="showFields()">
+                                        <option value="">Address</option>
+                                        <option value="Home">Home</option>
+                                        <option value="Company">Company</option>
+                                    </select>
+
+                                    <div *ngIf="showHomeFields" class="form-select">
+                                        <input type="text" id="address1" name="address1" style="border-radius: 5;"
+                                            formControlName="address1" placeholder="Home Address 1" />
+
+                                        <input type="text" id="address2" name="address2" style="border-radius: 5;"
+                                            formControlName="address2" placeholder="Home Address 2" />
+                                    </div>
+
+                                    <div *ngIf="showCompanyFields" class="form-select">
+                                        <input type="text" id="companyAddress1" name="companyAddress1"
+                                            formControlName="companyAddress1" placeholder="Company Address 1"
+                                            style="border-radius: 5;" />
+
+                                        <input type="text" id="companyAddress2" name="companyAddress2"
+                                            formControlName="companyAddress2" placeholder="Company Address 2"
+                                            style="border-radius: 5;" />
+                                    </div>
+                                    <div
+                                        *ngIf="registerUsers.get('address')?.hasError('required') && registerUsers.get('address')?.touched">
+                                        Address is required
+                                    </div>
+                                </div>
+                                <div class="form-select">
+                                    <!-- Tags for interests -->
+                                    <div class="tags-container">
+                                        <input placeholder="Tags" [matChipInputFor]="chipGrid"
+                                            (matChipInputTokenEnd)="add($event)" />
+
+                                        <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl"
+                                            formControlName="tag">
+                                            @for (keyword of keywords; track keyword) {
+                                            <mat-chip-row (removed)="removeKeyword(keyword)" >
+                                                {{keyword}}
+                                                <button matChipRemove aria-label="'remove ' + keyword">
+                                                    <mat-icon>cancel</mat-icon>
+                                                </button>
+
+                                            </mat-chip-row>
+
+                                            }
+                                        </mat-chip-grid>
+                                        <div>
+                                            <mat-error
+                                                *ngIf="registerUsers.get('tag')?.hasError('required') && registerUsers.get('tag')?.touched">
+                                                Tags are required
+                                            </mat-error>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-control border-0">
+                                    <input type="checkbox" name="subscribe" id="subscribe" formControlName="subscribe">
+                                    <span class="text-muted">subscribe to newslatter</span>
+                                    <div
+                                        *ngIf="registerUsers.get('subscribe')?.invalid && (registerUsers.get('subscribe')?.dirty || registerUsers.get('subscribe')?.touched)">
+                                        <div *ngIf="registerUsers.get('subscribe')?.errors">Please agree to the
+                                            terms and conditions</div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn border" data-bs-dismiss="modal"
+                                    style="margin: 10px;">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+        
+    </div>
+
+    <!-- Edit Photo Model Start -->
+
+    <div class="modal " id="updatephoto">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">Update Photo</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form [formGroup]="registerUsers" (ngSubmit)="submitForm()">
+                        <input type="file" class="form-control form-control-photo" id="photo" title="upload your photo"
+                            (change)="onFilechange($event)" accept="image/*" formControlName="photo" name="photo" />
+                    
+                        <label for="photo" class="form-label text-primary">upload your photo</label>
+                        <div *ngIf="imageSrc">
+                            <img [src]="imageSrc" alt="Preview" width="100" height="100">
+                        </div>
+                        <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+                        <div *ngIf="registerUsers.get('photo')?.hasError('required') && registerUsers.get('photo')?.touched">
+                            Image is required
+                        </div>
+                    </form>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Update</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Edit Photo Model End  -->
+</div>

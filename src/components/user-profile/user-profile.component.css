@@ -1,4 +1,10 @@
 .form-control-photo{
     width: 100px;
     height: 100px;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzqE8LeMTVpELy7wbrd9Sx9X_Z60_p3-ZYPvAR8aY-FcN4arlnaeQmmvMmcqnBxu5hJpA&usqp=CAU");
+    background-size: cover;
+}
+
+.details input , select{
+    margin: 8px;
 }

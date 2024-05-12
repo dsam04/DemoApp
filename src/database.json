@@ -1,20 +1,23 @@
 {
   "users": [
     {
-      "id": "6b0b",
-      "photo": "C:\\fakepath\\Image-with-310-x-85-pixels.png",
-      "firstName": "ABC",
+      "id": "ffa3",
+      "photo": "C:\\fakepath\\img2.jpg",
+      "firstName": "Abc",
       "lastName": "Xyz",
-      "email": "info@gmail.com",
-      "mobile": 1234567890,
+      "email": "info@gmai.com",
+      "mobile": 9632587410,
       "age": 23,
-      "state": "Goa",
+      "address": "Home",
+      "state": "Maharashtra",
       "country": "india",
       "tag": [
         "cricket",
+        "football",
         "hockey",
-        "badminton"
-      ]
+        "cooking"
+      ],
+      "subscribe": true
     }
   ]
 }
